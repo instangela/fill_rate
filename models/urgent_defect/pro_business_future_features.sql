@@ -1,8 +1,7 @@
 {{ config(
     materialized = "table",
-    post_hook = "{{ unload_model_feature_to_s3('urgent_defect') }}"
+    post_hook = "{{ unload_model_feature_to_s3() }}"
 ) }}
-
 
 SELECT ds, ID_worker_id, ID_business_id, MC_business_region, RV_INT_FUTURE_running_assigneds_with_business, RV_INT_FUTURE_running_unassigneds_with_business FROM (
     SELECT
