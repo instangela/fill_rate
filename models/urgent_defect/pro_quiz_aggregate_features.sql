@@ -1,8 +1,3 @@
-{{ config(
-    materialized = "table",
-    post_hook = "{{ unload_model_feature_to_s3() }}"
-) }}
-
 SELECT
     (CURRENT_DATE - 1) AS ds
     , user_id AS ID_worker_id

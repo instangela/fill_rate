@@ -16,7 +16,7 @@
             {% set split_name = schema_file_path.split('/') %}
             {%- if split_name|length > 2 -%}
                 {% set table_prefix = split_name[1] %}
-                {{ table_prefix | trim }}_{{ node.name }}
+                {{ table_prefix | trim }}__{{ node.name }}
             {%- else -%}
                 {{ node.name }}
             {%- endif -%}

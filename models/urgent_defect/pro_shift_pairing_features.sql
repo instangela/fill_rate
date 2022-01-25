@@ -1,8 +1,3 @@
-{{ config(
-    materialized = "table",
-    post_hook = "{{ unload_model_feature_to_s3() }}"
-) }}
-
 SELECT
     (CURRENT_DATE - 1) AS ds
     , gt.business_id AS ID_business_id
