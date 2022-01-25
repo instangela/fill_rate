@@ -4,8 +4,8 @@
 ) }}
 
 -- note: this table will be copied to ml-instawork-* as the following via S3
--- urgent_defect__output_pro
--- key, date, binary_features, int_features, float_features, categorical_features
+-- urgent_defect__pro
+-- key, date, binary_features, int_features, float_features, timestamp_features, categorical_features
 
 SELECT
     pasf.ID_worker_id AS key,
