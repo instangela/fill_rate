@@ -16,10 +16,12 @@
         {% do log("Unloading feature " ~ this.table ~ " to " ~ s3_path ~ "*", info=True) %}
         {{ sql }}
     {% else %}
-        {% do log("Skipping unloading of feature " ~ this.table ~ " for " ~ this.schema, info=True) %} 
+        {% do log("Skipping unloading of feature " ~ this.table ~ " for " ~ this.schema, info=True) %}
+        SELECT 1
     {% endif %}
 {% else %}
-    {% do log("UNLOAD is only supported by Redshift. Skipping unloading of feature " ~ this.table ~ " for " ~ this.schema, info=True) %}  
+    {% do log("UNLOAD is only supported by Redshift. Skipping unloading of feature " ~ this.table ~ " for " ~ this.schema, info=True) %}
+    SELECT 1 
 {% endif %}
 
 {% endmacro %}
