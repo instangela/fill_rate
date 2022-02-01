@@ -1,0 +1,28 @@
+default:
+  outputs:
+    dw:
+      type: redshift
+      host: localhost
+      user: ${REDSHIFT_USERNAME}
+      password: ${REDSHIFT_PASSWORD}
+      port: 31338
+      dbname: instawork
+      schema: iw_backend_db
+      threads: 4
+      keepalives_idle: 240
+      connect_timeout: 10
+      ra3: true
+    dev:
+      type: redshift
+      host: localhost
+      user: ${REDSHIFT_USERNAME}
+      password: ${REDSHIFT_PASSWORD}
+      port: 31338
+      autocreate: true
+      dbname: instawork
+      schema: ${ML_SCHEMA}
+      threads: 4
+      keepalives_idle: 240
+      connect_timeout: 10
+      ra3: true
+  target: dev
