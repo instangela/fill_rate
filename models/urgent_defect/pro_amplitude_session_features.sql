@@ -2,7 +2,7 @@ SELECT
     CURRENT_DATE AS ds
     , ID_worker_id
     -- count sessions
-    , SUM(CASE WHEN MC_event_occurence_range = 'lte_1_day' THEN 1 ELSE 0 END) AS RV_INT_lte_1_day_num_sessions
+    , SUM(CASE WHEN MC_event_occurence_range = 'lte_1_day' THEN 1 ELSE 0 END) AS {{ integer_feature('lte_1_day_num_sessions') }}
     , SUM(CASE WHEN MC_event_occurence_range = 'lte_3_days' THEN 1 ELSE 0 END) AS RV_INT_lte_3_day_num_sessions
     , SUM(CASE WHEN MC_event_occurence_range = 'lte_7_days' THEN 1 ELSE 0 END) AS RV_INT_lte_7_day_num_sessions
     , SUM(CASE WHEN MC_event_occurence_range = 'lte_30_days' THEN 1 ELSE 0 END) AS RV_INT_lte_30_day_num_sessions
