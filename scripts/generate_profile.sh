@@ -19,6 +19,8 @@ fi
 export ML_SCHEMA="ml-$1"
 export REDSHIFT_USERNAME=$2
 export REDSHIFT_PASSWORD=$3
+
+mkdir -p ~/.dbt
 envsubst < ./scripts/profiles.yml > ~/.dbt/profiles.yml
 
 echo "~/.dbt/profiles.yml generated"

@@ -19,6 +19,7 @@ You can run `./scripts/setup.sh` to setup your dbt profile and `mole`
 
 ```bash
 # ./scripts/setup.sh [dbt-username] [redshift-username] [redshift-password]
+# Example below:
 
 eric@erics-m1x ~/p/ml-transforms (main) [1]> ./scripts/setup.sh ehagman ml aBC1de2Fg3
 ~/.dbt/profiles.yml generated
