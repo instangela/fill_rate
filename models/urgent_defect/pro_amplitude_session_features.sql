@@ -1,5 +1,5 @@
 SELECT 
-    CURRENT_DATE AS ds
+    CURRENT_DATE - 1 AS ds
     , ID_worker_id
     -- count sessions
     , SUM(CASE WHEN MC_event_occurence_range = 'lte_1_day' THEN 1 ELSE 0 END) AS {{ integer_feature('lte_1_day_num_sessions') }}
