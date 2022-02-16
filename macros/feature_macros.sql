@@ -7,3 +7,4 @@
 {% macro float_feature(column) %}RV_FLOAT_{{ column }}{% endmacro %}
 {% macro meta_feature(column) %}MT_{{ column }}{% endmacro %}
 {% macro timestamp_feature(column) %}TS_{{ column }}{% endmacro %}
+{% macro id_feature(column) %}ID_{{ column }}{% endmacro %}
