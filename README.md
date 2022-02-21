@@ -42,6 +42,10 @@ Try running the following commands:
 - dbt run
 - dbt test
 
+### Quick Tips
+If you want to quickly test the changes made to a file to ensure that the sql generated is valid
+- dbt run --select <FILE_NAME>
+
 ### Resources:
 
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
