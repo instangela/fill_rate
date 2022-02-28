@@ -28,6 +28,11 @@ models:
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
   - name: pro_shift_pairing_features
     description: "Business features"
     columns:
@@ -42,6 +47,11 @@ models:
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
   - name: pro_worker_experience_features
     description: "Work experience for pros"
     columns:
@@ -49,6 +59,11 @@ models:
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
   - name: pro_quiz_aggregate_features
     description: "Quiz scores for pros"
     columns:
@@ -56,24 +71,70 @@ models:
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
   - name: pro_future_features
-    description: "TBD"
+    description: "Counter features encapsulating pro related events for shifts in the future"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
+  - name: pro_history_features
+    description: "Counter features encapsulating pro related events for shifts in the past"
+    columns:
+      - name: ID_worker_id
+        description: "The worker_id for the table"
+        tests:
+          - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
   - name: pro_business_future_features
-    description: "TBD"
+    description: "Counter features encapsulating pro and business related events for shifts in the future"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
+            - ID_business_id
   - name: pro_business_history_features
-    description: "TBD"
+    description: "Counter features encapsulating pro and business related events for shifts in the past"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_worker_id
+            - ID_business_id
+  - name: business_features
+    description: "Business related features"
+    columns:
+      - name: ID_business_id
+        description: "The business id for the table"
+        tests:
+          - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ds
+            - ID_business_id
