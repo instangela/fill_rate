@@ -1,16 +1,22 @@
-{% macro unload_model_feature_to_s3(model_name) %}
+{% macro unload_model_feature_to_s3(filesystem="append") %}
+
+{# used to validate our filesystem argument #}
+{% set filesystems = ["append", "drop"] %}
+{% if filesystem not in filesystems %}
+    {{ exceptions.raise_compiler_error("Invalid `filesystem`. Got: '" ~ filesystem ~ "'. Expected one of " ~ filesystems) }}
+{% endif %}
 
 {% set iam_role %}arn:aws:iam::183605072238:role/RedshiftMLTransformsRole{% endset %}
 
--- line up dev + prod prefix from lambda function
-{% set stage %}{% if target.name == "staging" %}dev{% else %}prod{% endif %}{% endset %}
-{% set s3_path %}s3://instawork-ml/transforms/{{ stage }}/{{ this.table }}__{% endset %}
+{# line up dev + prod prefix from lambda function #}
+{% set stage %}{% if target.name == "production" %}prod{% else %}dev{% endif %}{% endset %}
+{% set s3_path %}s3://instawork-ml/transforms/{{ stage }}/{{ invocation_id }}/{{ this.table }}__{{ filesystem }}__{% endset %}
 
 {% set sql %}
 {{ redshift.unload_table(this.schema, this.table, iam_role=iam_role, s3_path=s3_path, header=True, delimiter='|', parallel=False, max_file_size='5 mb', overwrite=True) }}
 {% endset %}
 
--- only unload for staging and production
+{# only unload for staging and production #}
 {% if target.type == "redshift" %}
     {% if target.name == "staging" or target.name == "production" %}
         {% do log("Unloading feature " ~ this.table ~ " to " ~ s3_path ~ "*", info=True) %}

@@ -1,6 +1,6 @@
 {{ config(
     materialized = "incremental",
-    post_hook = "{{ unload_model_feature_to_s3() }}"
+    post_hook = "{{ unload_model_feature_to_s3('drop') }}"
 ) }}
 
 -- note: this table will be copied to ml-instawork-* as the following via S3
