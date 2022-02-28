@@ -58,7 +58,9 @@ FROM (
         AND gt.position_fk_id <> 25
         AND gt.is_draft IS FALSE
         AND c.is_internal_only = 0
-        AND gt.business_id IS NOT NULL  
+        AND gt.business_id IS NOT NULL
+        -- need to exclude company ids as there are businesses which belong to multiple companies
+        AND gt.company_id NOT IN (355, 9830, 552, 8076, 4234, 9810, 1446, 7682, 8540, 1043, 9299, 8867, 10733, 10955, 13854, 13856, 13860, 12713, 36410, 35631, 36413, 36419, 34216, 32083, 36418)
     GROUP BY 
         1, 2, 3
 ) bzs
