@@ -13,7 +13,19 @@
 {% set s3_path %}s3://instawork-ml/transforms/{{ stage }}/{{ invocation_id }}/{{ this.table }}__{{ filesystem }}__{% endset %}
 
 {% set sql %}
-{{ redshift.unload_table(this.schema, this.table, iam_role=iam_role, s3_path=s3_path, header=True, delimiter='|', parallel=False, max_file_size='5 mb', overwrite=True) }}
+{{ unload_table(
+    this.schema,
+    this.table,
+    iam_role=iam_role,
+    s3_path=s3_path,
+    header=True,
+    delimiter='|',
+    parallel=False,
+    max_file_size='5 mb',
+    overwrite=True,
+    where="invocation_uuid = '" ~ invocation_id ~ "'"
+  )
+}}
 {% endset %}
 
 {# only unload for staging and production #}
