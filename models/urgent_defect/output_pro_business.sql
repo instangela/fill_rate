@@ -1,6 +1,6 @@
 {{ config(
     materialized = "incremental",
-    post_hook = "{{ unload_model_feature_to_s3() }}",
+    post_hook = "{{ unload_model_feature_to_s3('drop') }}",
     on_schema_change = "append_new_columns"
 ) }}
 
@@ -14,6 +14,7 @@
 SELECT
     (pbff.ID_worker_id || '_' || pbff.ID_business_id) AS key,
     (CURRENT_DATE - 1) AS date,
+    '{{ invocation_id }}' AS invocation_uuid,
     {{ dbt_utils.star(from=ref('pro_business_future_features'), except=["ID_worker_id", "ID_business_id", "MC_business_region", "ds"]) }},
     {{ dbt_utils.star(from=ref('pro_business_history_features'), except=["ID_worker_id", "ID_business_id", "MC_business_region", "ds"]) }}
 FROM {{ ref('pro_business_future_features') }} pbff

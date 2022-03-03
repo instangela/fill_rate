@@ -1,6 +1,6 @@
 {{ config(
     materialized = "incremental",
-    post_hook = "{{ unload_model_feature_to_s3() }}",
+    post_hook = "{{ unload_model_feature_to_s3('drop') }}",
     on_schema_change = "append_new_columns"
 ) }}
 
@@ -14,5 +14,6 @@
 SELECT
     bf.ID_business_id AS key,
     (CURRENT_DATE - 1) AS date,
+    '{{ invocation_id }}' AS invocation_uuid,
     {{ dbt_utils.star(from=ref('business_features'), except=["ID_business_id", "ds"]) }}
 FROM {{ ref('business_features') }} bf
