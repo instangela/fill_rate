@@ -2,6 +2,7 @@ SELECT
     CURRENT_DATE - 1 AS ds
     , bzs.business_id AS {{ id_feature('business_id') }}
     , bzs.company_id  AS {{ id_feature('company_id') }}
+    , COALESCE(biz.region, -1) AS {{ categorical_integer_feature('business_region') }}
     , biz_rm.displayname AS {{ categorical_string_feature('business_region_name') }}
     , bzs.business_type AS {{ categorical_string_feature('business_type') }}
     , bzs.{{ integer_feature('total_shifts') }} AS {{ integer_feature('total_shifts') }}
