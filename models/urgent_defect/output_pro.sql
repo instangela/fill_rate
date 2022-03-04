@@ -12,7 +12,7 @@
 -- the feature vector on a daily basis should be self contained and not an increment over previous day
 
 SELECT
-    pasf.ID_worker_id AS key,
+    ppf.ID_worker_id AS key,
     (CURRENT_DATE - 1) AS date,
     '{{ invocation_id }}' AS invocation_uuid,
     {{ dbt_utils.star(from=ref('pro_amplitude_session_features'), except=["ID_worker_id", "ds"]) }},
@@ -21,9 +21,9 @@ SELECT
     {{ dbt_utils.star(from=ref('pro_profile_features'), except=["ID_worker_id", "ds"]) }}, 
     {{ dbt_utils.star(from=ref('pro_quiz_aggregate_features'), except=["ID_worker_id", "ds"]) }}, 
     {{ dbt_utils.star(from=ref('pro_worker_experience_features'), except=["ID_worker_id", "ds"]) }}
-FROM {{ ref('pro_amplitude_session_features') }} pasf
+FROM {{ ref('pro_profile_features') }} ppf
 LEFT JOIN {{ ref('pro_future_features') }} USING (ID_worker_id)
 LEFT JOIN {{ ref('pro_history_features') }} USING (ID_worker_id)
-LEFT JOIN {{ ref('pro_profile_features') }} USING (ID_worker_id)
+LEFT JOIN {{ ref('pro_amplitude_session_features') }} pasf USING (ID_worker_id)
 LEFT JOIN {{ ref('pro_quiz_aggregate_features') }} USING (ID_worker_id)
 LEFT JOIN {{ ref('pro_worker_experience_features') }} USING (ID_worker_id)

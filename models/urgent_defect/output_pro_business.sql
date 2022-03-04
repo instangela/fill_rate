@@ -12,10 +12,10 @@
 -- the feature vector on a daily basis should be self contained and not an increment over previous day
 
 SELECT
-    (pbff.ID_worker_id || '_' || pbff.ID_business_id) AS key,
+    (pbhf.ID_worker_id || '_' || pbhf.ID_business_id) AS key,
     (CURRENT_DATE - 1) AS date,
     '{{ invocation_id }}' AS invocation_uuid,
     {{ dbt_utils.star(from=ref('pro_business_future_features'), except=["ID_worker_id", "ID_business_id", "MC_business_region", "ds"]) }},
     {{ dbt_utils.star(from=ref('pro_business_history_features'), except=["ID_worker_id", "ID_business_id", "MC_business_region", "ds"]) }}
-FROM {{ ref('pro_business_future_features') }} pbff
-LEFT JOIN {{ ref('pro_business_history_features') }} USING (ID_worker_id, ID_business_id, MC_business_region)
+FROM {{ ref('pro_business_history_features') }} pbhf
+LEFT JOIN {{ ref('pro_business_future_features') }} USING (ID_worker_id, ID_business_id, MC_business_region)
