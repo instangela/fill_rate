@@ -10,7 +10,7 @@
 
 {# line up dev + prod prefix from lambda function #}
 {% set stage %}{% if target.name == "production" %}prod{% else %}dev{% endif %}{% endset %}
-{% set s3_path %}s3://instawork-ml/transforms/{{ stage }}/{{ invocation_id }}/{{ this.table }}__{{ filesystem }}__{% endset %}
+{% set s3_path %}s3://instawork-ml-{{ stage }}/transforms/{{ stage }}/{{ invocation_id }}/{{ this.table }}__{{ filesystem }}__{% endset %}
 
 {% set sql %}
 {{ unload_table(
