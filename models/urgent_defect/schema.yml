@@ -23,6 +23,7 @@ sources:
 models:
   - name: pro_profile_features
     description: "Profile features for pros"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -35,6 +36,7 @@ models:
             - ID_worker_id
   - name: pro_shift_pairing_features
     description: "Business features"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_business_id
         description: "The business_id for the table"
@@ -42,6 +44,7 @@ models:
           - not_null
   - name: pro_amplitude_session_features
     description: "Amplitude sessions for pros"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -54,6 +57,7 @@ models:
             - ID_worker_id
   - name: pro_worker_experience_features
     description: "Work experience for pros"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -66,6 +70,7 @@ models:
             - ID_worker_id
   - name: pro_quiz_aggregate_features
     description: "Quiz scores for pros"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -78,6 +83,7 @@ models:
             - ID_worker_id
   - name: pro_future_features
     description: "Counter features encapsulating pro related events for shifts in the future"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -90,6 +96,7 @@ models:
             - ID_worker_id
   - name: pro_history_features
     description: "Counter features encapsulating pro related events for shifts in the past"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -102,6 +109,7 @@ models:
             - ID_worker_id
   - name: pro_business_future_features
     description: "Counter features encapsulating pro and business related events for shifts in the future"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -115,6 +123,7 @@ models:
             - ID_business_id
   - name: pro_business_history_features
     description: "Counter features encapsulating pro and business related events for shifts in the past"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_worker_id
         description: "The worker_id for the table"
@@ -128,6 +137,7 @@ models:
             - ID_business_id
   - name: business_features
     description: "Business related features"
+    on_schema_change: "append_new_columns"
     columns:
       - name: ID_business_id
         description: "The business id for the table"

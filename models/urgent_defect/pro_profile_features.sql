@@ -1,6 +1,7 @@
 SELECT
     ds
     , wpi.ID_worker_id
+    , wpi.{{ categorical_string_feature('worker_status') }}
     , B_is_email_verified
     , B_is_phonenum_verified
     , B_is_unsubscribe
@@ -68,6 +69,7 @@ FROM (
         CASE WHEN background_check_status IS NULL THEN 0 ELSE background_check_status END AS MC_background_check_status,
         CASE WHEN w2_status IS NULL THEN 0 ELSE w2_status END AS MC_w2_status,
         CASE WHEN applicant_app_os IS NOT NULL THEN applicant_app_os ELSE 'UNKNOWN' END AS MC_applicant_app_os,
+        worker_status AS {{ categorical_string_feature('worker_status') }},
         last_login AS TS_last_login,
         last_active AS TS_last_active,
         date_created AS TS_date_created,
