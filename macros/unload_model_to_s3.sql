@@ -23,6 +23,7 @@
     parallel=False,
     max_file_size='5 mb',
     overwrite=True,
+    manifest=True,
     where="invocation_uuid = '" ~ invocation_id ~ "'"
   )
 }}
