@@ -27,3 +27,4 @@ LEFT JOIN {{ ref('pro_history_features') }} USING (ID_worker_id)
 LEFT JOIN {{ ref('pro_amplitude_session_features') }} pasf USING (ID_worker_id)
 LEFT JOIN {{ ref('pro_quiz_aggregate_features') }} USING (ID_worker_id)
 LEFT JOIN {{ ref('pro_worker_experience_features') }} USING (ID_worker_id)
+WHERE ppf.{{ categorical_string_feature('worker_status') }} = 'active'
